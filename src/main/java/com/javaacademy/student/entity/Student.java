@@ -2,6 +2,7 @@ package com.javaacademy.student.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,14 +34,14 @@ public class Student {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "faculty_id")
+    @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
     @OneToOne
-    @JoinColumn(name = "curator_id", unique = true)
+    @JoinColumn(name = "curator_id", unique = true, nullable = false)
     private Curator curator;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"),
@@ -49,6 +50,7 @@ public class Student {
                     columnNames = {"student_id", "course_id"}
             )
     )
+    @ToString.Exclude
     private List<Course> courses;
 
     public Student(String name, Faculty faculty) {

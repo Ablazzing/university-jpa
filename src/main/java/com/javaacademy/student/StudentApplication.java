@@ -1,13 +1,12 @@
 package com.javaacademy.student;
 
-import com.javaacademy.student.entity.Course;
+import com.javaacademy.student.dto.StudentDto;
 import com.javaacademy.student.entity.Curator;
-import com.javaacademy.student.entity.Faculty;
-import com.javaacademy.student.entity.Student;
 import com.javaacademy.student.repository.CourseRepository;
 import com.javaacademy.student.repository.CuratorRepository;
 import com.javaacademy.student.repository.FacultyRepository;
 import com.javaacademy.student.repository.StudentRepository;
+import com.javaacademy.student.service.StudentService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -23,7 +22,18 @@ public class StudentApplication {
 		StudentRepository studentRepository = context.getBean(StudentRepository.class);
 		CuratorRepository curatorRepository = context.getBean(CuratorRepository.class);
 		CourseRepository courseRepository = context.getBean(CourseRepository.class);
-//		Создаем факультет факультет
+		Curator curator = new Curator("Могилевец");
+		curatorRepository.save(curator);
+
+		StudentService studentService = context.getBean(StudentService.class);
+		StudentDto studentDto = new StudentDto(null, "petr", 1,
+				curator.getId(), List.of(1, 2));
+		studentService.saveAll(List.of(studentDto));
+
+	}
+
+	public static void lesson4() {
+		//		Создаем факультет факультет
 //		Faculty economicFaculty = new Faculty("Экономический");
 //		facultyRepository.save(economicFaculty);
 

@@ -28,6 +28,9 @@ public class Faculty {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private Integer number;
+
     @OneToMany(mappedBy = "faculty", fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Student> students;

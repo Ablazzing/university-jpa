@@ -1,0 +1,1 @@
+insert into faculty (name) values ('engineering');

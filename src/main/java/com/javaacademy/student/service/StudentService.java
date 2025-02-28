@@ -11,6 +11,7 @@ import com.javaacademy.student.repository.CuratorRepository;
 import com.javaacademy.student.repository.FacultyRepository;
 import com.javaacademy.student.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class StudentService {
     private final FacultyRepository facultyRepository;
     private final CourseRepository courseRepository;
     private final CuratorRepository curatorRepository;
+
+    public List<Student> findAllByName(String name, Integer pageNumber) {
+        return studentRepository.findAllByName(name,
+                Pageable.ofSize(pageNumber).withPage(pageNumber)).getContent();
+    }
 
 //    public void save(StudentDto studentDto) {
 //        Student student = studentRepository.save(

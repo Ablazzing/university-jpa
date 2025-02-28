@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/student_jpa?currentSchema=test
+    username: postgres
+    password: terrrr
+    driver: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate # создает таблицы если не существует, дополняет существующие таблицы колонками
+    show-sql: true #Отображение sql запросов, который генерирует Hibernate или JPA
+    properties:
+      hibernate:
+        format_sql: true #Форматирование запросов (красивое отображение)
